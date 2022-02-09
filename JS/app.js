@@ -14,104 +14,49 @@ $(document).ready(function () {
 });
 
 
-//<------------ABSTRACTION---------->
-//part of what we used for akan names
-function isInvalidDay(d) {
-  return d < 1 || d > 31;
-};
+//<------------ABSTRACTION AND COMPOUND INTEREST------------->
 
-// console.log(isInvalidDay(91));
+let prinicpalAmount1 = 10000000;
+let rate1 = 5;
 
-function isInvalidMonth(m) {
-  return m < 1 || m > 12;
-};
+let prinicpalAmount2 = 8500000;
+let rate2 = 10;
 
-// console.log(isInvalidMonth(19));
+let yearsInvested = 10;
 
-function isInvalidRange(minValidNumber, maxValidNumber, testNumber) {
-  return testNumber < minValidNumber || testNumber > maxValidNumber;
-};
+function investNow(balance1, rate1, balance2, rate2, time) {
+  let currentValue1 = balance1;
+  let currentValue2 = balance2;
+  let countYears = 1;
 
-// console.log(isInvalidRange(1, 12, 9));
-
-//<----------ABSTRACTION-------------->
-
-//Standard Njonge invest 10,000,000, interest rate is 5%
-//F. Marete bank invest 8,500,000, interest rate is 6.6%
-//time is 10 years
-//ALGORITHM
-//Calculate balance of investment after a period of time for both, say 1 year.
-//Calculate profit for bank 1
-//Calculate profit for bank 2
-//compare SN-Profit with FM-Profit and pick the higher number
-
-
-// let bank1 = "Standard Njonge Bank";
-// let bank2 = "F Marete Bank";
-
-function moreProfitable(balance, interestRate, time) {
-  let currentBalance = balance;
-  let totalInterest = 0;
   for (let year = 1; year <= time; year++) {
-    let accumulatedInterest = currentBalance * (interestRate / 100);
-    currentBalance += accumulatedInterest;
-    totalInterest += accumulatedInterest;
+       let interest1 = currentValue1 * (rate1 / 100);
+    currentValue1 += interest1;
+   
+
+    let interest2 = currentValue1 * (rate2 / 100);
+    currentValue2 += interest2;
+   
+    if (currentValue2<= currentValue1) {
+      countYears++
+    }
   }
-  console.log(totalInterest);
-  return currentBalance;
 
-};
+   let profit1 = currentValue1-balance1;
+   let profit2 = currentValue2-balance2;
 
-// let bank1Profit = moreProfitable(10000000, 5, 5);
-// console.log(bank1Profit);
-
-
-
-//<--------------Same as above------------>
-
-// let calculateIncreasedBalance = function(balance, interestRate){
-//   return balance * (1 + (interestRate / 100));
-// }; 
-
-let calculateFinalBalance = function (balance, interestRate, numberOfYears) {
-  let countYears = 0;
-  let accAmount;
-  let newBalance=balance;
-
-  while (countYears< numberOfYears) {
-    newBalance = newBalance * (1 + (interestRate / 100));
-
-    countYears = countYears + 1
-  }
-  return Math.round(newBalance);
-};
-
-// let bank1 = "Standard Njonge Bank";
-// let bank2 = "F Marete Bank";
-
-// let years = 10;
-// let balance1 = 10000000;
-// let interestRate1 = 5;
-
-// let balance2 = 8500000;
-// let interestRate2 = 6.6;
-
-// let finalBalance1 = console.log(calculateFinalBalance(balance1, interestRate1, years));
-
-// let finalBalance2 = console.log(calculateFinalBalance(balance2, interestRate2, years));
-
-// let profit1 = finalBalance1-balance1;
-// let profit2 = finalBalance2 -balance2;
-
-// if (profit1>profit2) {
-//   console.log(bank1 + " is a better opportunity!");
-// } else {
-//   console.log(bank2 + " is a better opportunity!");
-// }
-
-function investNow (balance1, rate1, balance2, rate2, time) {
+  console.log(countYears);
   
+   if (profit1>profit2) {
+     console.log("Investment 1 is definitely the better option!");
+   } else {
+     console.log("Investment 2 is the way to go, put your money there!");
+   }
 }
 
-investNow(10000000, 5, 8500000, 6.6, 10);
+investNow(prinicpalAmount1, rate1, prinicpalAmount2, rate2, yearsInvested);
+
+
+
+
 
